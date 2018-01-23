@@ -1,0 +1,18 @@
+version: "2"
+
+services:
+  web:
+    ports:
+      - "8080:80"
+      - "8443:443"
+  php:
+    build:
+      args:
+        - BUILD_ENV=DEVELOPMENT
+    environment:
+      - BUILD_ENV=PRODUCTION
+    volumes:
+      - ./docker/php/log.conf:/usr/local/etc/php-fpm.d/zz-log.conf
+  postgres:
+    ports:
+      - "5432:5432"
