@@ -17,7 +17,7 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get clean && apt-get update && apt-get 
 RUN ln -s /etc/locale.alias /usr/share/locale/locale.alias
 RUN DEBIAN_FRONTEND="noninteractive" locale-gen en_US.UTF-8
 
-RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y vim curl wget build-essential nodejs
+RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y vim curl wget build-essential nodejs git
 RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
