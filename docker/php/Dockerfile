@@ -1,5 +1,6 @@
 FROM php:7.2-fpm
-MAINTAINER Khary Sharpe <ksharpe@email.com>
+
+LABEL maintainer="Khary Sharpe <ksharpe@email.com>"
 
 ARG BUILD_ENV=PRODUCTION
 
