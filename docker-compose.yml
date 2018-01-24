@@ -3,14 +3,17 @@ version: "2"
 services:
   web:
     container_name: web
-    image:   nginx:1.13
+    build:
+        context: ./docker/nginx
+        args:
+          BUILD_ENV: PRODUCTION
     restart: always
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./webapp:/var/www/webapp
+      - ./docker/nginx/config/default.conf:/etc/nginx/conf.d/default.conf
+      - ./webapp:/var/www/html
     networks:
       - webapp-network
   php:
@@ -18,20 +21,25 @@ services:
     build:
         context: ./docker/php
         args:
-          - BUILD_ENV=PRODUCTION
-    environment:
-      - BUILD_ENV=PRODUCTION
+          BUILD_ENV: PRODUCTION
     restart: always
     volumes:
-      - ./webapp:/var/www/webapp
+      - ./webapp:/var/www/html
     networks:
       - webapp-network
   postgres:
     container_name: postgres
-    image:   postgres:10.1
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-P@$$W0rd}
+      POSTGRES_DB: webapp
+    build:
+        context: ./docker/postgres
+        args:
+          BUILD_ENV: PRODUCTION
     restart: always
     volumes:
-      - ./storage/postgresql:/var/lib/postgresql
+      - ./storage/postgresql:/var/lib/postgresql/data
     networks:
       - webapp-network
 
