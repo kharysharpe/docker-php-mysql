@@ -10,7 +10,7 @@ services:
       args:
         BUILD_ENV: DEVELOPMENT
     volumes:
-      - ./docker/php/config/log.conf:/usr/local/etc/php-fpm.d/zz-log.conf
+      - ./docker/php/resources/config/log.conf:/usr/local/etc/php-fpm.d/zz-log.conf
   postgres:
     ports:
       - "5432:5432"
