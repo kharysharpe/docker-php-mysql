@@ -37,24 +37,35 @@ rm -f latest.tar.gz
 Building
 Running the local (development) environment
 ```
-docker-compose -f docker-compose.yml -f docker-compose-local.yml build
+./app build
 ```
 
 Running the local (development) environment
 ```
-docker-compose -f docker-compose.yml -f docker-compose-local.yml up
+./app watch
+```
+
+Running the local (development) environment detached
+```
+./app dev
+```
+
+Building the production environment
+```
+./app deploy
 ```
 
 Running the production environment
 ```
-docker-compose -f docker-compose.yml -d up
+./app start
 ```
 
 Switching to php container
 ```
-docker exec -it php bash
+./app bash
 ```
 
 
-Postgres is available on port 5432.
-Remember to create your database as needed.
+Postgres is available on port 5432, database `webapp` is created by default.
+
+
