@@ -8,6 +8,7 @@ services:
   php:
     environment:
       XDEBUG_HOST: ${XDEBUG_HOST}
+      APP_ENV: DEVELOPMENT
     build:
       args:
         BUILD_ENV: DEVELOPMENT

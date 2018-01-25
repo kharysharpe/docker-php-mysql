@@ -1,5 +1,6 @@
 #!/bin/bash
 #!/
+export XDEBUG_HOST=$(ipconfig getifaddr en0)
 
 if [ "$1" = "" ]
 then
@@ -17,6 +18,7 @@ then
   echo "build .............. Build containers for development"
   echo "force-build ........ Build containers for development without using cache"
   echo "watch .............. Bring container up and attached"
+  echo "dev ................ Bring container up and dettached with xdebug support"
   echo "start .............. Bring container up and dettached"
   echo "stop ............... Stop containers"
   echo "status ............. Container status"
@@ -59,29 +61,31 @@ fi
 if [ "$1" = "force-build" ]
 then
   echo "Building containers without using cache"
-  export XDEBUG_HOST=$(ipconfig getifaddr en0)
   docker-compose -f docker-compose.yml -f docker-compose-local.yml build --no-cache
 fi
 
 if [ "$1" = "build" ]
 then
   echo "Builiding containers"
-  export XDEBUG_HOST=$(ipconfig getifaddr en0)
   docker-compose -f docker-compose.yml -f docker-compose-local.yml build
 fi
 
 if [ "$1" = "watch" ]
 then
   echo "Bringing containers online"
-  export XDEBUG_HOST=$(ipconfig getifaddr en0)
   docker-compose -f docker-compose.yml -f docker-compose-local.yml up
+fi
+
+if [ "$1" = "dev" ]
+then
+  echo "Starting containers"  
+  docker-compose -f docker-compose.yml -f docker-compose-local.yml up -d
 fi
 
 if [ "$1" = "start" ]
 then
   echo "Starting containers"
-  export XDEBUG_HOST=$(ipconfig getifaddr en0)
-  docker-compose -f docker-compose.yml -f docker-compose-local.yml up -d
+  docker-compose -f docker-compose.yml up -d
 fi
 
 if [ "$1" = "stop" ]
