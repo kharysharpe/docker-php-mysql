@@ -67,7 +67,7 @@ fi
 if [ "$1" = "build" ]
 then
   echo "Builiding containers"
-  docker-compose -f docker-compose.yml -f docker-compose-local.yml build
+  docker-compose -f docker-compose.yml -f docker-compose-local.yml build 
 fi
 
 if [ "$1" = "watch" ]
@@ -78,7 +78,7 @@ fi
 
 if [ "$1" = "dev" ]
 then
-  echo "Starting containers"  
+  echo "Starting containers"
   docker-compose -f docker-compose.yml -f docker-compose-local.yml up -d
 fi
 

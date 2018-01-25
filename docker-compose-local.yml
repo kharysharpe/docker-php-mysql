@@ -6,12 +6,10 @@ services:
       - "8080:80"
       - "8443:443"
   php:
-    environment:
-      XDEBUG_HOST: ${XDEBUG_HOST}
-      APP_ENV: DEVELOPMENT
     build:
       args:
-        BUILD_ENV: DEVELOPMENT
+        XDEBUG_HOST: ${XDEBUG_HOST}
+        XDEBUG_CONF: conf.d
     volumes:
       - ./docker/php/resources/config/log.conf:/usr/local/etc/php-fpm.d/zz-log.conf
   postgres:
