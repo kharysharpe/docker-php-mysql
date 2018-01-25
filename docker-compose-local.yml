@@ -1,4 +1,4 @@
-version: "2"
+version:             "2"
 
 services:
   web:
@@ -6,6 +6,8 @@ services:
       - "8080:80"
       - "8443:443"
   php:
+    environment:
+      XDEBUG_HOST: ${XDEBUG_HOST}
     build:
       args:
         BUILD_ENV: DEVELOPMENT
@@ -15,9 +17,9 @@ services:
     ports:
       - "5432:5432"
   adminer:
-    container_name: adminer
-    image: adminer
-    restart: always
+    container_name:  adminer
+    image:           adminer
+    restart:         always
     ports:
       - 8765:8080
     networks:

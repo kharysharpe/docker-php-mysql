@@ -18,10 +18,9 @@ services:
       - webapp-network
   php:
     container_name: php
-    build:
-        context: ./docker/php
-        args:
-          BUILD_ENV: PRODUCTION
+    environment:
+      APP_ENV: PRODUCTION
+    build: ./docker/php
     restart: always
     volumes:
       - ./webapp:/var/www/html
@@ -33,10 +32,7 @@ services:
       PGDATA: /var/lib/postgresql/data/pgdata
 #      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-P@$$W0rd}
       POSTGRES_DB: webapp
-    build:
-        context: ./docker/postgres
-        args:
-          BUILD_ENV: PRODUCTION
+    build: ./docker/postgres
     restart: always
     volumes:
       - ./storage/postgresql:/var/lib/postgresql/data
