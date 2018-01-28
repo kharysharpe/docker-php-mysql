@@ -18,7 +18,10 @@ RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 RUN echo "LANG=en_US.UTF-8" > /etc/locale.
 RUN DEBIAN_FRONTEND="noninteractive" locale-gen en_US.UTF-8
 
-RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y vim curl wget build-essential git nodejs npm
+RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y vim curl wget build-essential git
+RUN DEBIAN_FRONTEND="noninteractive" curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y nodejs
+
 RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
