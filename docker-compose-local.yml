@@ -30,6 +30,7 @@ services:
     image:           mailhog/mailhog
     restart:         always
     ports:
+      - 1025:1025
       - 8025:8025
     networks:
       - webapp-network
@@ -38,6 +39,6 @@ services:
     build: ./docker/browser
     restart: always
     ports:
-      - 4444:4444    
+      - 4444:4444
     networks:
       - webapp-network
