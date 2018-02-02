@@ -10,6 +10,8 @@ services:
       args:
         XDEBUG_HOST: ${XDEBUG_HOST}
         XDEBUG_CONF: conf.d
+    cap_add:
+      - SYS_ADMIN
     volumes:
       - ./docker/php/resources/config/log.conf:/usr/local/etc/php-fpm.d/zz-log.conf
   postgres:
@@ -21,5 +23,21 @@ services:
     restart:         always
     ports:
       - 8765:8080
+    networks:
+      - webapp-network
+  mailhog:
+    container_name:  mailhog
+    image:           mailhog/mailhog
+    restart:         always
+    ports:
+      - 8025:8025
+    networks:
+      - webapp-network
+  browser:
+    container_name: browser
+    build: ./docker/browser
+    restart: always
+    ports:
+      - 4444:4444    
     networks:
       - webapp-network
