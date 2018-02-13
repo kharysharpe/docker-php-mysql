@@ -1,10 +1,9 @@
 version:             "2"
-
 services:
   web:
     ports:
-      - "8080:80"
-      - "8443:443"
+      - "8080:8080"
+      - "8443:8443"
   php:
     build:
       args:
@@ -21,6 +20,9 @@ services:
     container_name:  adminer
     image:           adminer
     restart:         always
+    environment:
+      ADMINER_DESIGN: "pepa-linha"
+      ADMINER_PLUGINS: "enum-types enum-option edit-calendar tables-filter dump-json"
     ports:
       - 8765:8080
     networks:
