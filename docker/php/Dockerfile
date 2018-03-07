@@ -68,3 +68,6 @@ RUN mkdir -p /root/src \
 
 # Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+EXPOSE 3000
+EXPOSE 3001

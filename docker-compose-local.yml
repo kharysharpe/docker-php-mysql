@@ -11,6 +11,9 @@ services:
         XDEBUG_CONF: conf.d
     cap_add:
       - SYS_ADMIN
+    ports:
+      - "3000:3000"
+      - "3001:3001"      
     volumes:
       - ./docker/php/resources/config/log.conf:/usr/local/etc/php-fpm.d/zz-log.conf
   postgres:
