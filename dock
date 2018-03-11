@@ -1,0 +1,147 @@
+#!/bin/bash
+#!/
+export XDEBUG_HOST=$(ipconfig getifaddr en0)
+
+if [ "$1" = "force-build" ]
+then
+  echo "Building containers without using cache"
+  docker-compose -f docker-compose.yml build --no-cache ${2}
+  exit 0
+fi
+
+if [ "$1" = "force-build:dev" ]
+then
+  echo "Building containers without using cache"
+  docker-compose -f docker-compose.yml -f docker-compose-local.yml build --no-cache ${2}
+  exit 0
+fi
+
+if [ "$1" = "build" ]
+then
+  echo "Builiding containers"
+  docker-compose -f docker-compose.yml build ${2}
+  exit 0
+fi
+
+if [ "$1" = "build:dev" ]
+then
+  echo "Builiding containers"
+  docker-compose -f docker-compose.yml -f docker-compose-local.yml build ${2}
+  exit 0
+fi
+
+if [ "$1" = "start:dev" ]
+then
+  echo "Starting containers"
+  docker-compose -f docker-compose.yml -f docker-compose-local.yml up -d ${2}
+  exit 0
+fi
+
+if [ "$1" = "watch" ]
+then
+  echo "Watching container logs"
+  docker-compose logs --follow ${2}
+  exit 0
+fi
+
+if [ "$1" = "start" ]
+then
+  echo "Starting containers"
+  docker-compose -f docker-compose.yml up -d ${2} && docker ps
+  exit 0
+fi
+
+if [ "$1" = "stop" ]
+then
+  echo "Stopping containers"
+  docker-compose stop ${2} && docker-compose rm -f ${2} && docker ps
+  exit 0
+fi
+
+if [ "$1" = "halt" ]
+then
+  echo "Halting all containers"
+  docker-compose stop $(docker ps -q) && docker-compose rm -f $(docker ps -q) && docker ps
+  exit 0
+fi
+
+if [ "$1" = "restart" ]
+then
+  echo "Restarting containers"
+  ./dock stop ${2} && sh dock start ${2}
+  exit 0
+fi
+
+if [ "$1" = "restart:dev" ]
+then
+  echo "Restarting containers"
+  ./dock stop ${2} && sh dock start:dev ${2}
+  exit 0
+fi
+
+if [ "$1" = "status" ]
+then
+  echo "Loading container status"
+  docker ps
+  exit 0
+fi
+
+if [ "$1" = "prune" ]
+then
+  echo "Removing all unused containers, images, cache, networks etc."
+  docker system prune
+  exit 0
+fi
+
+if [ "$1" = "kill-all" ]
+then
+  echo "Killing all containers"
+  docker kill $(docker ps -q) && docker ps
+  exit 0
+fi
+
+if [ "$1" = "remove-images" ]
+then
+  echo "Erasing all images"
+  docker rmi -f $(docker images -q)
+  exit 0
+fi
+
+if [ "$1" = "shell" ]
+then
+  echo "Jumping into container"
+  docker exec -it ${2} bash
+  exit 0
+fi
+
+
+echo ""
+echo "Usage: dock <command>"
+echo ""
+echo "e.g. "
+echo "./dock status"
+echo ""
+echo ""
+echo "General Commands:"
+echo ""
+echo "build .............. Build containers for development"
+echo "force-build ........ Build containers for development without using cache"
+echo "watch .............. Bring container up and attached"
+echo "start .............. Bring container up and dettached"
+echo "stop ............... Stop containers"
+echo "status ............. Container status"
+echo "prune .............. Prune containers, images, cache etc."
+echo "kill-all ............ Halt all containers"
+echo "remove-images ...... Erase all images"
+echo "shell .............. Start a bash shell"
+echo ""
+echo ""
+echo "Examples:"
+echo ""
+echo "./dock build"
+echo "./dock start"
+echo "./dock status"
+echo "./dock stop"
+
+
+exit 0
