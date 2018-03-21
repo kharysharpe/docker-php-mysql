@@ -54,14 +54,14 @@ fi
 if [ "$1" = "stop" ]
 then
   echo "Stopping containers"
-  docker-compose stop ${2} && docker-compose rm -f ${2} && docker ps
+  docker-compose -f docker-compose.yml -f docker-compose-local.yml stop ${2} && docker-compose rm -f ${2} && docker ps
   exit 0
 fi
 
 if [ "$1" = "halt" ]
 then
   echo "Halting all containers"
-  docker-compose stop $(docker ps -q) && docker-compose rm -f $(docker ps -q) && docker ps
+  docker-compose -f docker-compose.yml -f docker-compose-local.yml stop $(docker ps -q) && docker-compose rm -f $(docker ps -q) && docker ps
   exit 0
 fi
 
