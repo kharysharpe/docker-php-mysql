@@ -66,6 +66,8 @@ RUN mkdir -p /root/src \
     && phpunit --version
 
 
+COPY ./resources/config/log.conf /usr/local/etc/php-fpm.d/zz-log.conf
+
 # Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

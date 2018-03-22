@@ -13,9 +13,7 @@ services:
       - SYS_ADMIN
     ports:
       - "3000:3000"
-      - "3001:3001"      
-    volumes:
-      - ./docker/php/resources/config/log.conf:/usr/local/etc/php-fpm.d/zz-log.conf
+      - "3001:3001"
   postgres:
     ports:
       - "5432:5432"
