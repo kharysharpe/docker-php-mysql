@@ -37,6 +37,13 @@ then
   exit 0
 fi
 
+if [ "$1" = "dev" ]
+then
+  echo "Starting containers"
+  docker-compose -f docker-compose.yml -f docker-compose-local.yml up ${2}
+  exit 0
+fi
+
 if [ "$1" = "watch" ]
 then
   echo "Watching container logs"
