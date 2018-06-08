@@ -27,15 +27,14 @@ services:
     networks:
       - webapp-network
   postgres:
-    container_name: postgres
+    container_name: mysql
     environment:
-      PGDATA: /var/lib/postgresql/data/pgdata
-#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-P@$$W0rd}
-      POSTGRES_DB: webapp
-    build: ./docker/postgres
+      # MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-P@$$W0rd}
+      MYSQL_DATABASE: webapp
+    build: ./docker/mysql
     restart: always
     volumes:
-      - ./storage/postgresql:/var/lib/postgresql/data
+      - ./storage/mysql:/var/lib/mysql
     networks:
       - webapp-network
 

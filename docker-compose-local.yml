@@ -14,9 +14,9 @@ services:
     ports:
       - "3000:3000"
       - "3001:3001"
-  postgres:
+  mysql:
     ports:
-      - "5432:5432"
+      - "3306:3306"
   adminer:
     container_name:  adminer
     image:           adminer

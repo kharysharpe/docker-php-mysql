@@ -12,7 +12,7 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 # Ensure UTF-8
 
 RUN DEBIAN_FRONTEND="noninteractive" apt-get clean && apt-get update
-RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y apt-utils locales
+RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y apt-utils locales gnupg
 RUN echo "LC_ALL=en_US.UTF-8" >> /etc/environment
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 RUN echo "LANG=en_US.UTF-8" > /etc/locale.
