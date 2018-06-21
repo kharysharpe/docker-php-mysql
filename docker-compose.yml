@@ -26,12 +26,12 @@ services:
       - ./webapp:/var/www/html
     networks:
       - webapp-network
-  postgres:
+  mysql:
     container_name: mysql
+    build: ./docker/mysql
     environment:
       # MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-P@$$W0rd}
       MYSQL_DATABASE: webapp
-    build: ./docker/mysql
     restart: always
     volumes:
       - ./storage/mysql:/var/lib/mysql
